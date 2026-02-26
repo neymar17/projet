@@ -1,25 +1,21 @@
 <?php
-// Vérifier session et déterminer le rôle
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// Définit role_name strictement selon la session
 $role_name = null;
 
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-$role_name = null;
-
-// priorité للـ admin / technicien
-if (isset($_SESSION['tech_role']) && in_array($_SESSION['tech_role'], ['admin', 'technicien'])) {
+if (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
+    $role_name = 'user';
+} elseif (isset($_SESSION['tech_role']) && in_array($_SESSION['tech_role'], ['technicien', 'admin'])) {
     $role_name = $_SESSION['tech_role'];
 }
-// sinon user
-elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
-    $role_name = 'user';
+
+// Redirection si pas connecté
+if (!$role_name) {
+    header("Location: login.php");
+    exit;
 }
 ?>
 
@@ -46,11 +42,10 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
     </li>
 
     <hr class="sidebar-divider">
-
     <div class="sidebar-heading">Tickets</div>
 
     <?php if ($role_name === 'user'): ?>
-        <!-- Sidebar pour utilisateur -->
+        <!-- Menu utilisateur -->
         <li class="nav-item">
             <a class="nav-link" href="cree_ticket.php">
                 <i class="fas fa-plus"></i>
@@ -77,7 +72,7 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
         </li>
 
     <?php elseif ($role_name === 'technicien'): ?>
-        <!-- Sidebar pour technicien -->
+        <!-- Menu technicien -->
         <li class="nav-item">
             <a class="nav-link" href="tickets_assignes.php">
                 <i class="fas fa-tasks"></i>
@@ -115,11 +110,10 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
             </a>
         </li>
 
-
     <?php elseif ($role_name === 'admin'): ?>
-        <!-- Sidebar pour admin -->
+        <!-- Menu admin -->
         <li class="nav-item">
-            <a class="nav-link" href="tickets_tous.php">
+            <a class="nav-link" href="tickets.php">
                 <i class="fas fa-list"></i>
                 <span>Tous les tickets</span>
             </a>
@@ -148,7 +142,7 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
                 <span>Matériel</span>
             </a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="ajouter_materiel.php">
                 <i class="fas fa-plus"></i>
                 <span>Ajouter Matériel</span>
@@ -160,7 +154,7 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
                 <span>Base de connaissance</span>
             </a>
         </li>
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="gestion_user.php">
                 <i class="fas fa-users"></i>
                 <span>Gestion utilisateurs</span>
@@ -169,7 +163,7 @@ elseif (isset($_SESSION['usr_type']) && $_SESSION['usr_type'] === 'user') {
         <li class="nav-item">
             <a class="nav-link" href="inscription.php">
                 <i class="fas fa-users"></i>
-                <span>ajouter utilisateurs</span>
+                <span>Ajouter utilisateurs</span>
             </a>
         </li>
     <?php endif; ?>

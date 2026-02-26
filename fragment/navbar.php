@@ -150,14 +150,28 @@
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
-            <!-- Nav Item - User Information -->
-          <li class="nav-item dropdown no-arrow">
-  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-<?= isset($_SESSION['nom']) ? htmlspecialchars($_SESSION['nom'], ENT_QUOTES, 'UTF-8') : 'Invité' ?>
-    </span>
-    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-  </a>
+        <!-- Nav Item - User Information -->
+<li class="nav-item dropdown no-arrow">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small" title="Nom de l'utilisateur">
+            <?= isset($_SESSION['usr_nom']) 
+                ? htmlspecialchars($_SESSION['usr_nom'], ENT_QUOTES, 'UTF-8') 
+                : (isset($_SESSION['tech_nom']) 
+                    ? htmlspecialchars($_SESSION['tech_nom'], ENT_QUOTES, 'UTF-8') 
+                    : 'Invité') ?>
+        </span>
+        <img class="img-profile rounded-circle" 
+             src="https://scontent.falg7-6.fna.fbcdn.net/v/t1.30497-1/453178253_471506465671661_2781666950760530985_n.png?stp=dst-png_s200x200&_nc_cat=110&ccb=1-7&_nc_sid=a51fdb&_nc_eui2=AeEEou0hLIWnkMQJ2g6KZLcOWt9TLzuBU1Ba31MvO4FTUE3-SEdcuIhYISR3FNqMUmx8DHn_DsaKq0dWuUeON6W8&_nc_ohc=bmLvUWAMwQMQ7kNvwHJgI0z&_nc_oc=AdmS3TCx4PSj_k6flxUJjYL-2F1l2neiUAzyfgIqymtDtA2Cx1tdHZx0nJRQ0RfxJDE&_nc_zt=24&_nc_ht=scontent.falg7-6.fna&oh=00_Afvh1LZhjPmykdz_h5EiXm58LRZPK4Cfkh8iU0lPy6rGgg&oe=69C6EE7A" 
+             alt="Photo profil utilisateur" 
+             title="Photo profil">
+    </a>
+    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        <a class="dropdown-item" href="#">Profil</a>
+        <a class="dropdown-item" href="#">Paramètres</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="logout.php">Déconnexion</a>
+    </div>
+</li>
 
 
               <!-- Dropdown - User Information -->

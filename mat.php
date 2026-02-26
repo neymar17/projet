@@ -92,8 +92,10 @@ session_start();
 
 
 
-<script src="../vendor/jquery/jquery.min.js"></script>
-<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="../js/sb-admin-2.min.js"></script>
 
